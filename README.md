@@ -5,6 +5,7 @@ Una aplicación React para gestionar contactos, con múltiples vistas y caracter
 ## Componentes Principales
 
 ### 1. App (`App.jsx`)
+
 - Componente principal que orquesta toda la aplicación
 - Maneja el estado global para:
   - Vista actual (lista/grid)
@@ -12,6 +13,7 @@ Una aplicación React para gestionar contactos, con múltiples vistas y caracter
 - Renderiza el header y el contenedor principal de contactos
 
 ### 2. Header (`components/Header.jsx`)
+
 - Barra de navegación superior
 - Muestra el título de la aplicación
 - Contiene enlaces a secciones principales:
@@ -20,6 +22,7 @@ Una aplicación React para gestionar contactos, con múltiples vistas y caracter
   - Configuración
 
 ### 3. ContactList (`components/ContactList.jsx`)
+
 - Renderiza los contactos en formato lista
 - Características:
   - Muestra nombre y teléfono de cada contacto
@@ -27,6 +30,7 @@ Una aplicación React para gestionar contactos, con múltiples vistas y caracter
   - Permite seleccionar un contacto al hacer clic
 
 ### 4. ContactCard (`components/ContactCard.jsx`)
+
 - Muestra contactos en formato tarjeta
 - Características:
   - Diseño tipo card con avatar
@@ -35,6 +39,7 @@ Una aplicación React para gestionar contactos, con múltiples vistas y caracter
   - Animación hover
 
 ### 5. ContactDetail (`components/ContactDetail.jsx`)
+
 - Muestra información detallada del contacto seleccionado
 - Características:
   - Avatar del contacto
@@ -61,7 +66,14 @@ Una aplicación React para gestionar contactos, con múltiples vistas y caracter
 ## Estado del Proyecto
 
 Versión inicial con funcionalidades básicas implementadas:
+
 - ✅ Visualización de contactos
 - ✅ Cambio de vistas
 - ✅ Selección de contacto destacado
 - ✅ Diseño responsivo
+
+## Uso de Inteligencia Artificial
+
+Se utilizó IA en este proyecto:
+
+Para desarrollar esta actividad se desarrolló con ayuda de Copilot con Claude 3.5 Sonnet, con esa ayuda le explicaba las historias de usuario pidiendo que me explicara cada cambio que hacía para poder entender los cambios y poder aprender de desarrollo, fue muy fácil y cómodo, más que usar chat GPT, no tenía que explayarme mucho y entendía perfectamente lo que necesitaba.
