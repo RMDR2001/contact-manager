@@ -1,0 +1,44 @@
+.contact-detail {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.contact-detail h2 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.contact-detail-card {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.contact-avatar {
+  font-size: 3rem;
+  background-color: #f0f2f5;
+  padding: 1rem;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-info h3 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+}
+
+.contact-info p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.icon {
+  margin-right: 0.5rem;
+}
