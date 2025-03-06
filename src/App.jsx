@@ -1,30 +1,51 @@
+import { useState } from 'react'
 import Header from './components/Header'
 import contacts from './data/contacts'
 import ContactList from './components/ContactList'
-import ContactDetail from './components/ContactDetail'
+import ContactCard from './components/ContactCard'
 import './App.css'
 
 function App() {
-  // Seleccionamos el primer contacto como destacado
-  const destacado = contacts[0];
+  const [isGridView, setIsGridView] = useState(false);
 
   return (
     <div className="app">
       <Header />
       <div className="contacts-container">
-        <ContactDetail contact={destacado} />
-        <div className="contacts-list">
-          <h2>Lista de Contactos</h2>
-          <ul>
+        <div className="view-toggle">
+          <button 
+            className="toggle-button"
+            onClick={() => setIsGridView(!isGridView)}
+          >
+            {isGridView ? '📝 Vista Lista' : '📑 Vista Cards'}
+          </button>
+        </div>
+
+        {isGridView ? (
+          <div className="contacts-grid">
             {contacts.map((contacto) => (
-              <ContactList 
+              <ContactCard 
                 key={contacto.id}
                 nombre={contacto.nombre}
                 telefono={contacto.telefono}
+                email={contacto.email}
               />
             ))}
-          </ul>
-        </div>
+          </div>
+        ) : (
+          <div className="contacts-list">
+            <h2>Lista de Contactos</h2>
+            <ul>
+              {contacts.map((contacto) => (
+                <ContactList 
+                  key={contacto.id}
+                  nombre={contacto.nombre}
+                  telefono={contacto.telefono}
+                />
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   )
