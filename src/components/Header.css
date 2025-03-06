@@ -1,0 +1,42 @@
+.header {
+  background-color: #2c3e50;
+  padding: 1rem 2rem;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-brand h1 {
+  margin: 0;
+  font-size: 1.8rem;  /* Aumentamos el tamaño del texto */
+  color: white;
+  padding-right: 2rem; /* Añadimos padding a la derecha del título */
+}
+
+.header-nav {
+  flex: 1;          /* Permite que el nav ocupe el espacio disponible */
+  max-width: 500px; /* Limita el ancho máximo del nav */
+}
+
+.header-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-around; /* Distribuye los elementos uniformemente */
+  gap: 3rem;        /* Aumentamos el espacio entre los enlaces */
+}
+
+.header-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;  /* Aumentamos ligeramente el tamaño del texto */
+  transition: color 0.3s ease;
+  padding: 0.5rem 1rem; /* Añadimos padding a los enlaces */
+}
+
+.header-nav a:hover {
+  color: #3498db;
+}
