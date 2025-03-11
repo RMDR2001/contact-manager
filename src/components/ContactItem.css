@@ -1,21 +1,28 @@
 .contact-item {
   background-color: white;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1.5rem;
   margin-bottom: 1rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .contact-item:hover {
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.contact-item.active {
+  border: 2px solid #3498db;
+  background-color: #f1f8ff;
 }
 
 .contact-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .contact-header h3 {
@@ -25,13 +32,13 @@
 
 .type-badge {
   background-color: #f0f2f5;
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem;
   border-radius: 4px;
   font-size: 0.9rem;
   color: #666;
 }
 
-.contact-details p {
+.contact-info p {
   margin: 0.5rem 0;
   color: #666;
   display: flex;

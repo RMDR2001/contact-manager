@@ -7,9 +7,6 @@
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  display: flex;
-  gap: 2rem;
-  align-items: center;
 }
 
 .pinned-avatar {
@@ -54,17 +51,20 @@
 }
 
 .clear-button {
-  background-color: #ff4757;
+  background-color: #e74c3c;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .clear-button:hover {
-  background-color: #ff6b81;
+  background-color: #c0392b;
 }
 
 .pinned-empty {
@@ -78,4 +78,39 @@
 .pinned-empty p {
   margin: 0;
   font-size: 1.1rem;
+}
+
+.empty-state {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.empty-state p {
+  margin: 0;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.contact-info h3 {
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+}
+
+.contact-info p {
+  margin: 0.5rem 0;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contact-type {
+  display: inline-flex;
+  background-color: #f0f2f5;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-top: 1rem !important;
+  text-transform: capitalize;
 }

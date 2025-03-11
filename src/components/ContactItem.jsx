@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import './ContactItem.css'
 
-export default function ContactItem({ contact }) {
+export default function ContactItem({ contact, isActive, onClick }) {
   const getTypeIcon = (type) => {
     switch(type) {
       case 'familia': return '👨‍👩‍👧‍👦';
@@ -12,14 +12,17 @@ export default function ContactItem({ contact }) {
   };
 
   return (
-    <div className="contact-item">
+    <div 
+      className={`contact-item ${isActive ? 'active' : ''}`}
+      onClick={onClick}
+    >
       <div className="contact-header">
         <h3>{contact.nombre}</h3>
         <span className="type-badge">
           {getTypeIcon(contact.type)} {contact.type}
         </span>
       </div>
-      <div className="contact-details">
+      <div className="contact-info">
         <p><span className="icon">📞</span> {contact.telefono}</p>
         <p><span className="icon">✉️</span> {contact.email}</p>
       </div>
