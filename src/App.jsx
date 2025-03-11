@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import Header from './components/Header'
-import contacts from './data/contacts'
+import contactsData from './data/contacts.json'
 import ContactList from './components/ContactList'
 import ContactForm from './components/ContactForm'
 import './App.css'
 
 function App() {
-  const [contactList, setContactList] = useState([...contacts]);
-  const [selectedContact, setSelectedContact] = useState(contacts[0]);
+  const [contactList, setContactList] = useState([...contactsData.contacts]);
+  const [selectedContact, setSelectedContact] = useState(contactsData.contacts[0]);
   const [isGridView, setIsGridView] = useState(false);
   const [currentView, setCurrentView] = useState('contacts'); // 'contacts' o 'add'
 
