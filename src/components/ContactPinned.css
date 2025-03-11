@@ -1,0 +1,81 @@
+.contact-pinned {
+  margin-bottom: 2rem;
+}
+
+.pinned-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.pinned-avatar {
+  font-size: 3rem;
+  background-color: #f0f2f5;
+  padding: 1rem;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pinned-info h3 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+  font-size: 1.5rem;
+}
+
+.pinned-info p {
+  margin: 0.5rem 0;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pinned-type {
+  background-color: #f0f2f5;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  display: inline-flex !important;
+  text-transform: capitalize;
+}
+
+.pinned-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.clear-button {
+  background-color: #ff4757;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clear-button:hover {
+  background-color: #ff6b81;
+}
+
+.pinned-empty {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  color: #666;
+}
+
+.pinned-empty p {
+  margin: 0;
+  font-size: 1.1rem;
+}

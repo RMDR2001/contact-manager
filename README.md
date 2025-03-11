@@ -2,6 +2,8 @@
 
 Una aplicación React para gestionar contactos, con múltiples vistas y características interactivas.
 
+📱 **Aplicación Desplegada**: [https://contact-manager-seven-beta.vercel.app/](https://contact-manager-seven-beta.vercel.app/)
+
 ## Componentes Principales
 
 ### 1. App (`App.jsx`)
@@ -66,14 +68,13 @@ Una aplicación React para gestionar contactos, con múltiples vistas y caracter
 ## Estado del Proyecto
 
 Versión inicial con funcionalidades básicas implementadas:
-
 - ✅ Visualización de contactos
 - ✅ Cambio de vistas
 - ✅ Selección de contacto destacado
 - ✅ Diseño responsivo
+- ✅ Despliegue en Vercel
 
 ## Uso de Inteligencia Artificial
 
 Se utilizó IA en este proyecto:
-
-Para desarrollar esta actividad se desarrolló con ayuda de Copilot con Claude 3.5 Sonnet, con esa ayuda le explicaba las historias de usuario pidiendo que me explicara cada cambio que hacía para poder entender los cambios y poder aprender de desarrollo, fue muy fácil y cómodo, más que usar chat GPT, no tenía que explayarme mucho y entendía perfectamente lo que necesitaba.
+- Para desarrollar esta actividad se desarrolló con ayuda de Copilot con Claude 3.5 Sonnet, con esa ayuda le explicaba las historias de usuario pidiendo que me explicara cada cambio que hacía para poder entender los cambios y poder aprender de desarrollo, fue muy fácil y cómodo, más que usar chat GPT, no tenía que explayarme mucho y entendía perfectamente lo que necesitaba.
