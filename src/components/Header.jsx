@@ -1,20 +1,29 @@
-import './Header.css';
+import './Header.css'
+import PropTypes from 'prop-types';
 
-function Header() {
+export default function Header({ onNavigate, currentView }) {
   return (
     <header className="header">
-      <div className="header-brand">
-        <h1>📞 Contact Manager</h1>
-      </div>
-      <nav className="header-nav">
-        <ul>
-          <li><a href="#contacts">Contactos</a></li>
-          <li><a href="#favorites">Favoritos</a></li>
-          <li><a href="#settings">Configuración</a></li>
-        </ul>
+      <h1>Administrador de Contactos</h1>
+      <nav className="nav-menu">
+        <button 
+          className={`nav-button ${currentView === 'contacts' ? 'active' : ''}`}
+          onClick={() => onNavigate('contacts')}
+        >
+          👥 Contactos
+        </button>
+        <button 
+          className={`nav-button ${currentView === 'add' ? 'active' : ''}`}
+          onClick={() => onNavigate('add')}
+        >
+          ➕ Agregar Nuevo Contacto
+        </button>
       </nav>
     </header>
   );
 }
 
-export default Header;
+Header.propTypes = {
+  onNavigate: PropTypes.func.isRequired,
+  currentView: PropTypes.string.isRequired,
+};
