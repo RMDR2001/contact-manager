@@ -11,10 +11,14 @@ const ContactPinned = ({ contact, onClear }) => {
   return (
     <div style={styles.card}>
       <div style={styles.header}>
-        <h3 style={styles.title}>Contacto Destacado</h3>
+        <h3 style={styles.title}>
+          Contacto Destacado
+          <span style={styles.selectedIndicator}>✓</span>
+        </h3>
         <button 
           onClick={onClear}
           style={styles.clearButton}
+          aria-label="Limpiar selección"
         >
           ❌ Limpiar
         </button>
@@ -46,7 +50,8 @@ const styles = {
     borderRadius: '8px',
     padding: '20px',
     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-    margin: '20px 0'
+    margin: '20px 0',
+    transition: 'all 0.3s ease'
   },
   placeholder: {
     backgroundColor: '#f8f9fa',
@@ -109,13 +114,19 @@ const styles = {
     flexShrink: 0,  // Evita que el botón se encoja
     ':hover': {
       backgroundColor: '#cc0000',
-      transform: 'translateY(-2px)'
+      transform: 'translateY(-2px)',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
     }
   },
   hint: {
     fontSize: '0.9rem',
     color: '#999',
     marginTop: '10px'
+  },
+  selectedIndicator: {
+    marginLeft: '8px',
+    color: '#4CAF50',
+    fontSize: '1rem'
   }
 };
 
