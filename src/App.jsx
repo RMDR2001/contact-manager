@@ -1,54 +1,86 @@
-import { useState } from 'react';
-import useLocalStorage from './hooks/useLocalStorage';
+import { useState, useEffect, useCallback } from 'react';
+import { 
+  getContacts, 
+  createContact, 
+  handleApiError 
+} from './services/contactService';
 import './App.css';
 import Header from './components/Header';
 import ContactList from './components/ContactList';
 import ContactPinned from './components/ContactPinned';
-import SelectionHistory from './components/SelectionHistory';
 import ContactForm from './components/ContactForm';
-import { contacts as initialContacts } from './data/contacts';
+import LoadingSpinner from './components/LoadingSpinner';
+import ErrorMessage from './components/ErrorMessage';
 
 function App() {
-  // Usar useLocalStorage en lugar de useState para contacts
-  const [contacts, setContacts] = useLocalStorage('contacts', initialContacts);
-  const [selectedContact, setSelectedContact] = useState(contacts[0]);
-  const [selectionHistory, setSelectionHistory] = useState([contacts[0]]);
+  const [contacts, setContacts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [selectedContact, setSelectedContact] = useState(null);
 
-  const handleAddContact = (newContact) => {
-    setContacts(prev => [...prev, newContact]);
+  const fetchContacts = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      setErrorMessage('');
+      const data = await getContacts();
+      setContacts(data);
+      !selectedContact && setSelectedContact(data[0]);
+    } catch (error) {
+      setErrorMessage(handleApiError(error));
+    } finally {
+      setIsLoading(false);
+    }
+  }, [selectedContact]);
+
+  useEffect(() => {
+    fetchContacts();
+  }, [fetchContacts]);
+
+  const handleCreateContact = async (contactData) => {
+    try {
+      setIsLoading(true);
+      const newContact = await createContact(contactData);
+      setContacts(prev => [...prev, newContact]);
+      setSelectedContact(newContact);
+      return { success: true };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: handleApiError(error)
+      };
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleContactSelect = (contact) => {
-    setSelectedContact(contact);
-    setSelectionHistory(prev => {
-      const newHistory = [contact, ...prev.filter(item => item.id !== contact.id)].slice(0, 3);
-      return newHistory;
-    });
-  };
-
-  const handleClearContact = () => {
-    setSelectedContact(null);
-  };
 
   return (
     <div style={styles.app}>
       <Header />
       <main style={styles.main}>
-        <div style={styles.layout}>
-          <div>
-            <ContactForm onSave={handleAddContact} />
-            <ContactPinned 
-              contact={selectedContact}
-              onClear={handleClearContact}
-            />
-            <SelectionHistory history={selectionHistory} />
-          </div>
-          <ContactList 
-            contacts={contacts}
-            selectedContact={selectedContact}
-            onContactSelect={handleContactSelect}
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : errorMessage ? (
+          <ErrorMessage 
+            message={errorMessage}
+            onRetry={fetchContacts}
           />
-        </div>
+        ) : (
+          <div style={styles.layout}>
+            <div>
+              <ContactForm onSave={handleCreateContact} />
+              <ContactPinned 
+                contact={selectedContact}
+                onClear={() => setSelectedContact(null)}
+              />
+            </div>
+            <ContactList 
+              contacts={contacts}
+              selectedContact={selectedContact}
+              onContactSelect={setSelectedContact}
+            />
+          </div>
+        )}
       </main>
     </div>
   );
