@@ -1,12 +1,12 @@
 const ContactItem = ({ contact, isSelected, onClick }) => {
   return (
     <li 
+      onClick={onClick}
       style={{
         ...styles.listItem,
         backgroundColor: isSelected ? '#e8f5e9' : 'white',
         border: isSelected ? '2px solid #4CAF50' : '1px solid #eee'
       }}
-      onClick={onClick}
     >
       <div style={styles.contactInfo}>
         <h3 style={styles.name}>{contact.fullname}</h3>

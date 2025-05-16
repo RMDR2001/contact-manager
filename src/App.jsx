@@ -3,13 +3,19 @@ import './App.css';
 import Header from './components/Header';
 import ContactList from './components/ContactList';
 import ContactPinned from './components/ContactPinned';
+import SelectionHistory from './components/SelectionHistory';
 import { contacts } from './data/contacts';
 
 function App() {
   const [selectedContact, setSelectedContact] = useState(contacts[0]);
+  const [selectionHistory, setSelectionHistory] = useState([contacts[0]]);
 
   const handleContactSelect = (contact) => {
     setSelectedContact(contact);
+    setSelectionHistory(prev => {
+      const newHistory = [contact, ...prev.filter(item => item.id !== contact.id)].slice(0, 3);
+      return newHistory;
+    });
   };
 
   const handleClearContact = () => {
@@ -21,14 +27,17 @@ function App() {
       <Header />
       <main style={styles.main}>
         <div style={styles.layout}>
-          <ContactPinned 
-            contact={selectedContact} 
-            onClear={handleClearContact}
-          />
+          <div>
+            <ContactPinned 
+              contact={selectedContact}
+              onClear={handleClearContact}
+            />
+            <SelectionHistory history={selectionHistory} />
+          </div>
           <ContactList 
             contacts={contacts}
-            onContactSelect={handleContactSelect}
             selectedContact={selectedContact}
+            onContactSelect={handleContactSelect}
           />
         </div>
       </main>
