@@ -1,5 +1,3 @@
-
-
 const ContactDetail = ({ contact }) => {
   if (!contact) return <div>Selecciona un contacto</div>;
 
@@ -9,11 +7,26 @@ const ContactDetail = ({ contact }) => {
       <div style={styles.content}>
         <div style={styles.field}>
           <span style={styles.label}>Nombre:</span>
-          <span style={styles.value}>{contact.name}</span>
+          <span style={styles.value}>{contact.fullname}</span>
         </div>
         <div style={styles.field}>
           <span style={styles.label}>Teléfono:</span>
-          <span style={styles.value}>{contact.phone}</span>
+          <span style={styles.value}>{contact.phonenumber}</span>
+        </div>
+        <div style={styles.field}>
+          <span style={styles.label}>Email:</span>
+          <span style={styles.value}>{contact.email}</span>
+        </div>
+        <div style={styles.field}>
+          <span style={styles.label}>Tipo:</span>
+          <span style={{
+            ...styles.badge,
+            backgroundColor: 
+              contact.type === 'familia' ? '#4CAF50' :
+              contact.type === 'trabajo' ? '#2196F3' : '#FF9800'
+          }}>
+            {contact.type}
+          </span>
         </div>
       </div>
     </div>
@@ -50,6 +63,15 @@ const styles = {
   },
   value: {
     color: '#333'
+  },
+  badge: {
+    display: 'inline-block',
+    padding: '4px 8px',
+    borderRadius: '12px',
+    color: 'white',
+    fontSize: '0.8rem',
+    fontWeight: 'bold',
+    textTransform: 'capitalize'
   }
 };
 
