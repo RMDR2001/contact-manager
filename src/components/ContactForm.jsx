@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const ContactForm = ({ onSave }) => {
   const [formData, setFormData] = useState({
@@ -15,8 +15,10 @@ const ContactForm = ({ onSave }) => {
   });
 
   const [isValid, setIsValid] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
-  const validateForm = () => {
+  const validateForm = useCallback(() => {
     const newErrors = {
       fullname: '',
       phonenumber: '',
@@ -48,26 +50,34 @@ const ContactForm = ({ onSave }) => {
 
     setErrors(newErrors);
     return !Object.values(newErrors).some(error => error !== '');
-  };
+  }, [formData]);
 
   useEffect(() => {
     setIsValid(validateForm());
-  }, [formData]);
+  }, [formData, validateForm]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isValid) {
-      const newContact = {
-        ...formData,
-        id: Date.now()
-      };
-      onSave(newContact);
-      setFormData({
-        fullname: '',
-        phonenumber: '',
-        email: '',
-        type: 'social'
-      });
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const result = await onSave(formData);
+      if (result.success) {
+        // Limpiar formulario
+        setFormData({
+          fullname: '',
+          phonenumber: '',
+          email: '',
+          type: 'social'
+        });
+      } else {
+        setSubmitError(result.error || 'Error al crear el contacto');
+      }
+    } catch {
+      setSubmitError('Error inesperado. Por favor, intenta nuevamente.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -153,10 +163,12 @@ const ContactForm = ({ onSave }) => {
           opacity: isValid ? 1 : 0.7,
           cursor: isValid ? 'pointer' : 'not-allowed'
         }}
-        disabled={!isValid}
+        disabled={!isValid || isSubmitting}
       >
-        💾 Guardar Contacto
+        {isSubmitting ? 'Guardando...' : '💾 Guardar Contacto'}
       </button>
+
+      {submitError && <div style={styles.errorSubmit}>{submitError}</div>}
     </form>
   );
 };
@@ -228,6 +240,12 @@ const styles = {
     color: '#ff4444',
     fontSize: '0.8rem',
     marginTop: '4px'
+  },
+  errorSubmit: {
+    color: '#ff4444',
+    fontSize: '0.9rem',
+    marginTop: '10px',
+    textAlign: 'center'
   }
 };
 
