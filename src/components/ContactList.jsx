@@ -1,10 +1,32 @@
 import { useState } from 'react';
 import ContactItem from './ContactItem';
 import ContactGrid from './ContactGrid';
+import SearchBar from './SearchBar';
 
 const ContactList = ({ contacts, onContactSelect, selectedContact }) => {
   const [viewType, setViewType] = useState('list');
+  const [filteredContacts, setFilteredContacts] = useState(contacts);
+
   const toggleView = () => setViewType(viewType === 'list' ? 'grid' : 'list');
+
+  const handleSearch = (searchTerm) => {
+    if (!searchTerm.trim()) {
+      setFilteredContacts(contacts);
+      return;
+    }
+
+    const filtered = contacts.filter(contact => {
+      const searchTermLower = searchTerm.toLowerCase();
+      return (
+        contact.fullname.toLowerCase().includes(searchTermLower) ||
+        contact.email.toLowerCase().includes(searchTermLower) ||
+        contact.phonenumber.includes(searchTerm) ||
+        contact.type.toLowerCase().includes(searchTermLower)
+      );
+    });
+
+    setFilteredContacts(filtered);
+  };
 
   return (
     <div>
@@ -15,9 +37,11 @@ const ContactList = ({ contacts, onContactSelect, selectedContact }) => {
         </button>
       </div>
 
+      <SearchBar onSearch={handleSearch} />
+
       {viewType === 'list' ? (
         <ul style={styles.list}>
-          {contacts.map(contact => (
+          {filteredContacts.map(contact => (
             <ContactItem 
               key={contact.id}
               contact={contact}
@@ -28,7 +52,7 @@ const ContactList = ({ contacts, onContactSelect, selectedContact }) => {
         </ul>
       ) : (
         <ContactGrid
-          contacts={contacts}
+          contacts={filteredContacts}
           selectedContact={selectedContact}
           onContactSelect={onContactSelect}
         />
