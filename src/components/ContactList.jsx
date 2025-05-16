@@ -1,20 +1,19 @@
 import { useState } from 'react';
+import ContactItem from './ContactItem';
+import ContactGrid from './ContactGrid';
 
 const ContactList = ({ contacts, onContactSelect, selectedContact }) => {
-  const [viewType, setViewType] = useState('list'); // 'list' o 'cards'
+  const [viewType, setViewType] = useState('list');
 
   const toggleView = () => {
-    setViewType(viewType === 'list' ? 'cards' : 'list');
+    setViewType(viewType === 'list' ? 'grid' : 'list');
   };
 
   return (
     <div className="contact-list">
       <div style={styles.header}>
         <h2>Mis Contactos</h2>
-        <button 
-          onClick={toggleView} 
-          style={styles.toggleButton}
-        >
+        <button onClick={toggleView} style={styles.toggleButton}>
           {viewType === 'list' ? '📱 Ver Cards' : '📝 Ver Lista'}
         </button>
       </div>
@@ -22,40 +21,20 @@ const ContactList = ({ contacts, onContactSelect, selectedContact }) => {
       {viewType === 'list' ? (
         <ul style={styles.list}>
           {contacts.map(contact => (
-            <li 
-              key={contact.id} 
-              style={{
-                ...styles.listItem,
-                backgroundColor: selectedContact.id === contact.id ? '#e8f5e9' : 'transparent',
-                cursor: 'pointer'
-              }}
+            <ContactItem 
+              key={contact.id}
+              contact={contact}
+              isSelected={selectedContact?.id === contact.id}
               onClick={() => onContactSelect(contact)}
-            >
-              <div style={styles.contactInfo}>
-                <span style={styles.name}>{contact.name}</span>
-                <span style={styles.phone}>{contact.phone}</span>
-              </div>
-            </li>
+            />
           ))}
         </ul>
       ) : (
-        <div style={styles.cardsGrid}>
-          {contacts.map(contact => (
-            <div 
-              key={contact.id} 
-              style={{
-                ...styles.card,
-                border: selectedContact.id === contact.id ? '2px solid #4CAF50' : 'none'
-              }}
-              onClick={() => onContactSelect(contact)}
-            >
-              <div style={styles.cardContent}>
-                <h3 style={styles.cardName}>{contact.name}</h3>
-                <p style={styles.cardPhone}>{contact.phone}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ContactGrid
+          contacts={contacts}
+          selectedContact={selectedContact}
+          onContactSelect={onContactSelect}
+        />
       )}
     </div>
   );
@@ -81,53 +60,6 @@ const styles = {
     listStyle: 'none',
     padding: 0,
     margin: '20px 0'
-  },
-  listItem: {
-    padding: '10px',
-    borderBottom: '1px solid #eee',
-    margin: '5px 0',
-    color: '#333'
-  },
-  contactInfo: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  name: {
-    fontWeight: 'bold',
-    color: '#333'
-  },
-  phone: {
-    color: '#666'
-  },
-  cardsGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-    gap: '20px',
-    padding: '20px 0'
-  },
-  card: {
-    backgroundColor: 'white',
-    borderRadius: '8px',
-    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-    transition: 'transform 0.2s ease',
-    cursor: 'pointer',
-    ':hover': {
-      transform: 'translateY(-5px)'
-    }
-  },
-  cardContent: {
-    padding: '15px'
-  },
-  cardName: {
-    margin: '0 0 10px 0',
-    color: '#333',
-    fontSize: '1.1rem'
-  },
-  cardPhone: {
-    margin: 0,
-    color: '#666',
-    fontSize: '0.9rem'
   }
 };
 

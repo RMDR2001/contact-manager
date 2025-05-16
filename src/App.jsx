@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import './App.css'
+import './App.css';
 import Header from './components/Header';
 import ContactList from './components/ContactList';
-import ContactDetail from './components/ContactDetail';
+import ContactPinned from './components/ContactPinned';
 import { contacts } from './data/contacts';
 
 function App() {
@@ -12,12 +12,19 @@ function App() {
     setSelectedContact(contact);
   };
 
+  const handleClearContact = () => {
+    setSelectedContact(null);
+  };
+
   return (
     <div style={styles.app}>
       <Header />
       <main style={styles.main}>
         <div style={styles.layout}>
-          <ContactDetail contact={selectedContact} />
+          <ContactPinned 
+            contact={selectedContact} 
+            onClear={handleClearContact}
+          />
           <ContactList 
             contacts={contacts}
             onContactSelect={handleContactSelect}
@@ -32,8 +39,7 @@ function App() {
 const styles = {
   app: {
     minHeight: '100vh',
-    backgroundColor: '#fff',
-    color: '#333'  // Agregamos color base para toda la aplicación
+    backgroundColor: '#f5f5f5'
   },
   main: {
     padding: '2rem'
